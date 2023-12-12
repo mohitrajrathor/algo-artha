@@ -1,3 +1,3 @@
 # algo-artha
-A Algorithmic trading platform developtment framwork.<br>
+A Algorithmic Trading framwork.<br>
 Author - Mohit Raj Rathor
