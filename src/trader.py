@@ -3,7 +3,6 @@ import pandas as pd
 
 
 class Strategy:
-    """class docstring goes here."""
     def __init__(self, strategy_name: str = None, data: pd.DataFrame = None) -> None:
         """
         Base strategy class
