@@ -51,4 +51,5 @@ def refresh_shoonya_symbols_files() -> None:
 
 
 if __name__ == "__main__":
+    # downloading all shoonya symbol files.
     refresh_shoonya_symbols_files()
