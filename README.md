@@ -1,3 +1,3 @@
 # Algo-Artha
 #### An algorithmic-trading framework.
-Auther - Mohit Raj Rathor
+Author - Mohit Raj Rathor
