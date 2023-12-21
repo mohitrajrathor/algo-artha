@@ -40,7 +40,7 @@ Connection-Status - <Active or Inactive>          Time - <hh:mm:ss dd-MM-yyyy | 
 username : <Name in >
 user-id : <user id>
     """
-    format = "Connection-Status - "+
+    format = "Connection-Status - "+""
 
 
 
