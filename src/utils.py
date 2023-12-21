@@ -33,7 +33,22 @@ class Colors:
 
 
 
+def display_status() -> None:
+    """
+    display status of the application in the format like it 
+Connection-Status - <Active or Inactive>          Time - <hh:mm:ss dd-MM-yyyy | None>
+username : <Name in >
+user-id : <user id>
+    """
+    format = "Connection-Status - "+
+
+
+
 def refresh_shoonya_symbols_files() -> None:
+    """
+    function to fatch all the masters files povided by shoonya api.
+    """
+
     # exchanges - list 
     exchanges = ['NSE', 'NFO', 'CDS', 'MCX', 'BSE', 'BFO']
 
