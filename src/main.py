@@ -10,7 +10,7 @@ import pyotp
 # defining api object & login
 api = ShoonyaApiPy()
 
-def login(cred:dict) -> dict:
+def login(cred:dict) -> str:
     """
     Login to Shoonya api
     params
