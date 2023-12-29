@@ -38,3 +38,6 @@ def login(cred:dict) -> str:
 with open("./config/cred.yml") as f:
     cred_data = yaml.load(f, Loader=yaml.FullLoader)            # fatching login credentials
 
+response = login(cred_data)
+
+pprint(response)
