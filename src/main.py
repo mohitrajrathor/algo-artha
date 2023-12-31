@@ -4,8 +4,7 @@ import yaml
 from pprint import pprint
 import pyotp
 
-############# PRE-REQUIRED THING SETUP #############
-
+############# PRE-REQUIRED SETUP #############
 
 # defining api object & login
 api = ShoonyaApiPy()

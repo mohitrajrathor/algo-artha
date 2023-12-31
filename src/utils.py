@@ -2,6 +2,7 @@
 import requests
 import zipfile
 import os
+import time
 
 # color codes used for terminals.
 class Colors:
@@ -44,27 +45,47 @@ user-id : <user id>
 
 
 
-def refresh_shoonya_symbols_files() -> None:
+def refresh_shoonya_symbols_files() -> bool:
     """
     function to fatch all the masters files povided by shoonya api.
     """
-
     # exchanges - list 
     exchanges = ['NSE', 'NFO', 'CDS', 'MCX', 'BSE', 'BFO']
 
-    for exch in exchanges:
-        print(f"Downloading {Colors.BLUE}{exch}_symbols.txt{Colors.END} ")
-        response = requests.get(f"https://api.shoonya.com/{exch}_symbols.txt.zip")
-        open("temp.zip", "wb+").write(response.content)         # writing zip file. 
-        try:
-            with zipfile.ZipFile("temp.zip") as z:              # extracting zip_file
-                z.extractall("./data/shoonya_symbols/")
-        except:
-            print("    "+Colors.RED+f"Error : Invalid File '{exch}_symbols.txt'"+Colors.END)
+    try:
+        for exch in exchanges:
+            print(f"Downloading {Colors.BLUE}{exch}_symbols.txt{Colors.END} ")
+            response = requests.get(f"https://api.shoonya.com/{exch}_symbols.txt.zip")
+            open("temp.zip", "wb+").write(response.content)         # writing zip file. 
+            try:
+                with zipfile.ZipFile("temp.zip") as z:              # extracting zip_file
+                    z.extractall("./data/shoonya_symbols/")
+            except:
+                print("    "+Colors.RED+f"Error : Invalid File '{exch}_symbols.txt'"+Colors.END)
 
-        os.remove("temp.zip")          # removing temp.zip file.
+            os.remove("temp.zip")          # removing temp.zip file.
+    except Exception as e:
+        print(f"Can't refresh master files\nError : {e}")
+        return False
+    else :
+        return True
+    
+
+def terminate(reason:str = None, intime:int=3) -> None:
+    if reason is None:
+        print(Colors.RED+"Terminating Program in 3 second."+Colors.END, sep="")
+    else:
+        print(Colors.YELLOW+f"Warning : {reason}"+Colors.END)
+        print(Colors.RED+"Terminating Program in 3 second."+Colors.END, sep="")
+    # stating timer 
+    for i in range(intime):
+        print("..", sep="")
+        time.sleep(1)
+    # exit from the program.
+    exit()
+    return 
 
 
 if __name__ == "__main__":
-    # downloading all shoonya symbol files.
-    refresh_shoonya_symbols_files()
+    # To test program write below.
+    pass

@@ -1,5 +1,9 @@
+# enviroment files
 __pycache__
 venv
 cred.yml
 config/
 .idea/
+.vscode/
+
+# files to exclude
