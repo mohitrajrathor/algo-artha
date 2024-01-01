@@ -3,6 +3,9 @@ import requests
 import zipfile
 import os
 import time
+import datetime as dt
+
+from tables import Col
 
 # color codes used for terminals.
 class Colors:
@@ -32,6 +35,22 @@ class Colors:
     CROSSED = "\033[9m"
     END = "\033[0m"
 
+def display_bullish_alert(sym:str,msg:str, d_time:dt.datetime) -> None:
+    message = Colors.YELLOW+f"{d_time.strftime('%Y-%m-%d %H:%M:%S')}"+Colors.END+f" : {sym} "+Colors.GREEN+f"{msg}"+Colors.END
+    print(message)
+
+
+def cross_time(tg_time:str) -> bool:
+    ''' 
+    return ture if given time is passed.
+    param -> tg_time 
+                pass time in '<year>-<month>-<day> <hour>:<minute>:<second>'
+    '''
+    curr_time = dt.datetime.now()
+    target_time = dt.datetime.now().strptime(tg_time, "%Y-%m-%d %H:%M:%S")
+
+    if curr_time > target_time: return True
+    else: return False
 
 
 def display_status() -> None:
@@ -59,7 +78,7 @@ def refresh_shoonya_symbols_files() -> bool:
             open("temp.zip", "wb+").write(response.content)         # writing zip file. 
             try:
                 with zipfile.ZipFile("temp.zip") as z:              # extracting zip_file
-                    z.extractall("./data/shoonya_symbols/")
+                    z.extractall("./data/shoonya_masters/")
             except:
                 print("    "+Colors.RED+f"Error : Invalid File '{exch}_symbols.txt'"+Colors.END)
 
