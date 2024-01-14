@@ -7,3 +7,4 @@ config/
 .vscode/
 
 # files to exclude
+To-Do.txt

@@ -4,8 +4,19 @@ import zipfile
 import os
 import time
 import datetime as dt
+from plyer import notification
+import pandas as pd
 
-from tables import Col
+
+########## ERRORS ##########
+
+class MisMatchError(Exception):
+    """
+    raise error when the given list of columns is not equals the stocks list passed.
+    """
+    pass
+
+
 
 # color codes used for terminals.
 class Colors:
@@ -35,10 +46,94 @@ class Colors:
     CROSSED = "\033[9m"
     END = "\033[0m"
 
-def display_bullish_alert(sym:str,msg:str, d_time:dt.datetime) -> None:
-    message = Colors.YELLOW+f"{d_time.strftime('%Y-%m-%d %H:%M:%S')}"+Colors.END+f" : {sym} "+Colors.GREEN+f"{msg}"+Colors.END
+
+
+############### MESSAGE FUNCTIONS ##############
+
+def display_bullish_alert(sym:str,msg:str, time:str=dt.datetime.now().strftime("%d-%m-%Y %H:%M:%S")) -> None:
+    message = Colors.YELLOW+f"{time}"+Colors.END+f" : {sym} "+Colors.GREEN+f"{msg}"+Colors.END
     print(message)
 
+def display_bearish_alert(sym:str, msg:str, time:str=dt.datetime.now().strftime("%d-%m-%Y %H:%M:%S")) -> None:
+    message = Colors.YELLOW+f"{time}"+Colors.END+f" : {sym} "+Colors.RED+f"{msg}"+Colors.END
+    print(message)
+
+# ----> desktop alert function
+def notify(title:str, msg:str, time:str)-> None:
+
+    notification.notify(
+        title=title+"\nat "+time,
+        message=msg,
+        timeout=10
+    )
+
+
+def display_screened_stocks(stocks_lists:list[list[str]], columns:list[str], screen_type: str = "") -> None:
+    """
+    param:
+        stocks_list -> list of screend list of stocks
+        columns -> list of names of columns
+        screen_type -> Either 'bullish' (add green color to the data) or 'bearish' (add red color to the data) or empty string.
+    """
+
+    # table creation and header adding
+    if len(stocks_lists) != len(columns):
+        raise MisMatchError("Numbers of columns does not match with numbers of stocks list given.")
+    
+    # giving the color code to the data
+    if screen_type == "bullish":
+        prefix = Colors.GREEN
+        sufix = Colors.END
+    
+    elif screen_type == "bearish":
+        prefix = Colors.RED
+        sufix = Colors.END
+
+    else:
+        prefix = ""
+        sufix = ""
+
+    # printing tables
+    table = PrettyTable(columns)
+    flag = False
+    index = 0
+    while not flag:
+        temp = 0
+        temp_list = []
+        for lst in stocks_lists:
+            try:
+                temp_list.append(prefix+lst[index]+sufix)
+            except IndexError:
+                temp_list.append(" ")
+                temp += 1
+        
+        index += 1
+
+        if temp == len(stocks_lists):
+            break
+        else:
+            table.add_row(temp_list)
+
+    print(table)
+    # END OF FUNCTION
+
+
+
+
+
+# ----> DISPLAY STATUS
+def display_status() -> None:
+    """
+    display status of the application in the format like it 
+Connection-Status - <Active or Inactive>          Time - <hh:mm:ss dd-MM-yyyy | None>
+username : <Name in >
+user-id : <user id>
+    """
+    format = "Connection-Status - "+""
+
+
+
+############## CROSS FUNCTIONS ##############
 
 def cross_time(tg_time:str) -> bool:
     ''' 
@@ -53,17 +148,9 @@ def cross_time(tg_time:str) -> bool:
     else: return False
 
 
-def display_status() -> None:
-    """
-    display status of the application in the format like it 
-Connection-Status - <Active or Inactive>          Time - <hh:mm:ss dd-MM-yyyy | None>
-username : <Name in >
-user-id : <user id>
-    """
-    format = "Connection-Status - "+""
 
-
-
+############## REPEATING FUNCTIONS ##############
+    
 def refresh_shoonya_symbols_files() -> bool:
     """
     function to fatch all the masters files povided by shoonya api.
@@ -89,7 +176,6 @@ def refresh_shoonya_symbols_files() -> bool:
     else :
         return True
     
-
 def terminate(reason:str = None, intime:int=3) -> None:
     if reason is None:
         print(Colors.RED+"Terminating Program in 3 second."+Colors.END, sep="")
@@ -102,9 +188,9 @@ def terminate(reason:str = None, intime:int=3) -> None:
         time.sleep(1)
     # exit from the program.
     exit()
-    return 
+    return None 
 
 
 if __name__ == "__main__":
     # To test program write below.
-    pass
+    ...

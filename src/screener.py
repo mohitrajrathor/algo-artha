@@ -17,8 +17,9 @@ from pprint import pprint
 ############### utils functions ###############
 
 
+############### Screeners ###############
 
-
+#### Basic screener
 class Screener:
     def __init__(self, symbols:list[str] , info:str=None) -> None:
         """
@@ -84,11 +85,11 @@ class Screener:
         screened_sym = [i.split('.')[0] for i in screened_sym]      # removing .NS from end
         return screened_sym
     
-
+#### previous day's top gainer and looser screener
 class Top_gainer_looser_screener(Screener):
     def __init__(self, symbols: list[str], info: str = None) -> None:
         super().__init__(symbols, info)
-        self.info = "Screen previous day's top gainer and looser stocks of given list "       # over-write self.info of screenr class
+        self.info = "Screen previous day's top gainer and looser stocks of given list."       # over-write self.info of screenr class
 
 
     def get_data(self, symbol:list[str], exchange=".NS") -> DataFrame:
@@ -139,8 +140,5 @@ class Top_gainer_looser_screener(Screener):
     
 # testing 
 if __name__ == "__main__":
-    nifty50 = pd.read_csv('./data/nifty_50.csv')['Symbol'].to_list()
-
-    gl = Top_gainer_looser_screener(nifty50)
-    result = gl.screen()
-    pprint(result)
+    """test functioning of the code"""
+    ...
