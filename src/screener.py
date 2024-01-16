@@ -21,16 +21,12 @@ from pprint import pprint
 
 #### Basic screener
 class Screener:
-    def __init__(self, symbols:list[str] , info:str=None) -> None:
+    def __init__(self) -> None:
         """
         Base class for screeners to show how to make screener.
         Screen stocks on Daily historical data basis.
         """
-        self.symbols = symbols
-        if info is None:
-            self.info = "Screen stocks from given symbols that are above 20 moving average."
-        else:
-            self.info = info
+        pass
 
         def __str__(self) -> str:
             return f"Screener class\n{self.info}"
@@ -71,14 +67,14 @@ class Screener:
         else: 
             return False
         
-    def screen(self)->list[str]:
+    def screen(self, symbols:list[str])->list[str]:
         """
         Screen stocks using self.get_data and self.condition functions
         param: Nil
         return: list[str] (of filtered stocks)
         """
         screened_sym = []
-        for i in self.symbols:
+        for i in symbols:
             if self.condition(self.get_data(i)):
                 screened_sym.append(i)
             
