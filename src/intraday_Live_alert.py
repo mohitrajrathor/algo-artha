@@ -15,7 +15,6 @@ from pprint import pprint
 import pyotp
 from utils import *
 import pandas as pd
-import time
 import datetime as dt 
 from screener import Top_gainer_looser_screener
 import warnings
@@ -30,6 +29,8 @@ SD_DIR = './screend_data/'              # directory to store screened data.
 ############### Variables ###############
 bullish_stocks = []
 bearish_stocks = []
+rsi_below_30 = []
+rsi_above_70 = []
 all_stocks_to_watch = []
 
 ############### functions ###############
@@ -37,7 +38,11 @@ all_stocks_to_watch = []
 # live data fatching and prepossesing using BROKER API
 def fatch_live_data(sym, days=5, interval:str = "5") -> pd.DataFrame:
     start_time = (dt.datetime.now() - dt.timedelta(days=5)).timestamp()
-    ret = api.get_time_price_series(exchange="NSE", token=str(nse_master['Token'].loc['SBIN']), starttime=start_time, interval=interval)
+    ret = api.get_time_price_series(
+        exchange="NSE", 
+        token=str(nse_master['Token'].loc['SBIN']),
+        starttime=start_time, interval=interval
+    )
     data = pd.DataFrame(ret)
     data.columns = [
         'stat',
@@ -93,6 +98,16 @@ def _5_min_low_breakout(symlist:list[str]) -> None:
             )
     
     print("Scan complete at", Colors.YELLOW+dt.datetime.now().strftime("%d-%m-%Y %H:%M:%S")+Colors.END)
+
+
+# 1 HOUR RSI is above 70 OR below 30.
+def rsi_alert(symlist:list[str]) -> list:
+    ...
+
+
+
+
+
 
 
 ############# PRE-REQUIRED THING SETUP #############

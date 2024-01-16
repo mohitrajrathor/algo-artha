@@ -136,6 +136,15 @@ class Top_gainer_looser_screener(Screener):
     def screen(self) -> dict:
         return self.condition(self.get_data(self.symbols))
 
+class IntradayScreener(Screener):
+    """
+    base class for all intraday screener
+    """
+    def __init__(self, symbols: list[str], info: str = None) -> None:
+        super().__init__(symbols, info)
+
+    def fetch_data():
+        ...
 
     
 # testing 
