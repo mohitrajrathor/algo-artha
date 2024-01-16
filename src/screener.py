@@ -12,6 +12,7 @@ import pandas as pd
 import pandas_ta
 import datetime as dt 
 from pprint import pprint
+import os
 
 
 ############### utils functions ###############
@@ -47,6 +48,7 @@ class Screener:
         # setting dates
         start_date = (dt.datetime.now() - dt.timedelta(days=days)).strftime("%Y-%m-%d")
         data = yf.download(tickers=symbol+".NS", start=start_date)
+        os.system("cls")
         # lowering case
         data.index.name = "date"
         data.columns = data.columns.str.lower()     
