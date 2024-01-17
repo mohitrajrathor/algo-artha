@@ -9,3 +9,4 @@ config/
 # files to exclude
 To-Do.txt
 src/shoonya
+data/shoonya_masters
