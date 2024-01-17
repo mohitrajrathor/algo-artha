@@ -4,9 +4,9 @@
 import pandas as pd
 import sys
 sys.path.append('./src/')
-from screener import Screener
+from screeners.screener import Screener
 import pandas_ta
-from pprint import pprint                # for better data view.
+from pprint import pprint                    # for better data view.
 
 # error
 class DataNotValid(Exception):
@@ -70,3 +70,5 @@ if __name__ == "__main__":
 
 
         
+
+
