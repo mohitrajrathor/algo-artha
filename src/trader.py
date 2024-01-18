@@ -28,13 +28,13 @@ class BackTest:
         self.risk = risk
                 
 
-    def add_data(self)->BackTest:
+    def add_data(self)->self:
         """
         Method to add data for back-testing strategies. 
         """
         pass
 
-    def deploy_strategy(self, strategy:Stretegy)->BackTest:
+    def deploy_strategy(self, strategy:Stretegy)->self:
         """
         Method to add strategy to Backtest instance.
         """
