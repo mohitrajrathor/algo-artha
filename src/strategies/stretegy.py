@@ -15,6 +15,7 @@ class Stretegy:
             param: 
                 sl_percent -> define stoploss percent. | default = 0.25 %
                 target -> define target to get. | default = 1 %
+                total_risk -> total risk defined on the capital. | default = 5 %
         """
         self.description = "This is a base Strategy class."
         self.sl_percent = sl_percent
