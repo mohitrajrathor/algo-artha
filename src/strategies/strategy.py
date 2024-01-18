@@ -44,13 +44,6 @@ class Stretegy:
         print("No exit signal defined may be you are using base strategy class.\nPlease use a defined strategy like MovingAverageCrossover strategy defined in strategy library.")
         return False
 
-    def add_data(self)->None:
-        """
-        method to add data for backtesting.
-        """
-        print("No not adding method defined may be you are using base strategy class.\nPlease use a defined strategy like MovingAverageCrossover strategy defined in strategy library.")
-        return False
-
     def position_sizing(self)->int:
         """
         method to decied position sizing.
