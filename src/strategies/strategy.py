@@ -6,6 +6,23 @@ Created on: Tues Jan 16 2024
 
 # Base Strategy Module
 
+
+# utils functions
+def cross_above(series1, series2):
+    if series1[-2] <= series2[-2] and series1[-1] > series2[-1]:
+        return True
+    else:
+        False
+
+
+def cross_below(series1, series2):
+    if series1[-2] >= series2[-2] and series1[-1] < series2[-1]:
+        return True
+    else:
+        return False
+
+
+
 class Stretegy:
     def __init__(self, sl_percent:float=0.25, target:float=1, total_risk:float=5) -> None:
         """
