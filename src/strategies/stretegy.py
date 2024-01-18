@@ -7,14 +7,19 @@ Created on: Tues Jan 16 2024
 # Base Strategy Module
 
 class Stretegy:
-    def __init__(self, description:str="this is a base moving average crossover Strategy.", sl_percent:float=0.25, target:float=1) -> None:
+    def __init__(self, sl_percent:float=0.25, target:float=1, total_risk:float=5) -> None:
         """
         Strategy class:
             Blueprint for making strategies.
+
+            param: 
+                sl_percent -> define stoploss percent. | default = 0.25 %
+                target -> define target to get. | default = 1 %
         """
-        self.description = description
+        self.description = "This is a base moving average crossover Strategy."
         self.sl_percent = sl_percent
         self.target = target
+        self.total_risk = total_risk
         
 
     def buy_signal(self)->bool:
@@ -55,4 +60,5 @@ class Stretegy:
         pass
 
 
-
+    def __str__(self):
+        return f"Strategy class object\nDescription: {self.description}\nTotal Risk: {self.total_risk}% \nRisk TO Reward: {self.target / self.sl_percent}"
