@@ -3,11 +3,16 @@ An algorithmic-trading framework for building daily & intraday screenrs, strateg
 Author - Mohit Raj Rathor
 
 ### Content
-+ [Setup](#setup)
++ [Setup](#setup) 
+
 + [Getting-started](#getting-started)
+
 + [Examples](#examples)
+
 + [Notebooks](#notebooks)
+
 + [Contribution](#contribution)
+
 
 ## Setup
 Clone the repository.
