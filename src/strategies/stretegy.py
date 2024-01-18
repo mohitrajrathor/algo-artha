@@ -16,7 +16,7 @@ class Stretegy:
                 sl_percent -> define stoploss percent. | default = 0.25 %
                 target -> define target to get. | default = 1 %
         """
-        self.description = "This is a base moving average crossover Strategy."
+        self.description = "This is a base Strategy class."
         self.sl_percent = sl_percent
         self.target = target
         self.total_risk = total_risk
@@ -26,39 +26,43 @@ class Stretegy:
         """
         returns True when buying condition is true.
         """
-        pass
+        print("No buy signal defined may be you are using base strategy class.\nPlease use a defined strategy like MovingAverageCrossover strategy defined in strategy library.")
+        return False
 
     def sell_signal(self)->bool:
         """
         returns True when selling condition is true.
         """
-        pass
+        print("No sell signal defined may be you are using base strategy class.\nPlease use a defined strategy like MovingAverageCrossover strategy defined in strategy library.")
+        return False
 
     def exit_signal(self)->bool:
         """
         returns True when exiting condition is true.
         """
-        pass
+        print("No exit signal defined may be you are using base strategy class.\nPlease use a defined strategy like MovingAverageCrossover strategy defined in strategy library.")
+        return False
 
     def add_data(self)->None:
         """
         method to add data for backtesting.
         """
-        pass
+        print("No not adding method defined may be you are using base strategy class.\nPlease use a defined strategy like MovingAverageCrossover strategy defined in strategy library.")
+        return False
 
     def position_sizing(self)->int:
         """
         method to decied position sizing.
         """
-        pass
-
+        print("No position sizing method defined may be you are using base strategy class.\nPlease use a defined strategy like MovingAverageCrossover strategy defined in strategy library.")
+        return 0
 
     def stoploss_traling(self)->float:
         """
         method to determine and take action on stoploss trailing.
         """
-        pass
-
+        print("No stoploss trailing defined may be you are using base strategy class.\nPlease use a defined strategy like MovingAverageCrossover strategy defined in strategy library.")
+        return 0
 
     def __str__(self):
         return f"Strategy class object\nDescription: {self.description}\nTotal Risk: {self.total_risk}% \nRisk TO Reward: {self.target / self.sl_percent}"
