@@ -1,5 +1,5 @@
 # Algo-Artha
-An algorithmic-trading framework for building daily & intraday screenrs, strategies and Backtesting purpose.
+An algorithmic-trading framework for building daily & intraday screenrs, strategies and Backtesting purposes.
 Author - Mohit Raj Rathor
 
 ### Content
