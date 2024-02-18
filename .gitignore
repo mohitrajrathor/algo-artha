@@ -1,6 +1,6 @@
 # enviroment files
 __pycache__
-venv
+.venv
 cred.yml
 config/
 .idea/

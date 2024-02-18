@@ -7,7 +7,7 @@ created on Sun Jan 14 2024
 
 
 # libraries required
-from strategies.stretegy import Stretegy
+from strategies.strategy import Stretegy
 
 
 
