@@ -65,10 +65,6 @@ class MomentumScreener(Screener):
 if __name__ == "__main__":
     nifty200 = pd.read_csv("./data/nifty_200.csv")['Symbol'].to_list()
     momentum_screener = MomentumScreener()
+    momStocks = momentum_screener.screen(nifty200)
 
-    pprint(momentum_screener.screen(nifty200))
-
-
-        
-
-
+    pprint(momStocks)
