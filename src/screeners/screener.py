@@ -11,7 +11,8 @@ import yfinance as yf
 import pandas as pd 
 import pandas_ta
 import datetime as dt 
-from pprint import pprint
+
+# from pprint import pprint
 import os
 
 
@@ -27,10 +28,16 @@ class Screener:
         Base class for screeners to show how to make screener.
         Screen stocks on Daily historical data basis.
         """
-        pass
+        self.info = "Base class for screeners to show how to make screener. Screen stocks on Daily historical data basis."
 
         def __str__(self) -> str:
             return f"Screener class\n{self.info}"
+
+    def validate(self, data:pd.DataFrame):
+        for col in "open high low close volume".split():
+            if col not in data.columns:
+                raise DataNotValid("Data Does not valid.")
+
 
     def get_data(self, symbol:str, days:int=300, exchange=".NS") -> pd.DataFrame:
         """
@@ -82,17 +89,3 @@ class Screener:
             
         screened_sym = [i.split('.')[0] for i in screened_sym]      # removing .NS from end
         return screened_sym
-    
-
-
-class IntradayScreener(Screener):
-    """
-    base class for all intraday screener
-    """
-    def __init__(self, symbols: list[str], info: str = None) -> None:
-        super().__init__(symbols, info)
-
-    def fetch_data():
-        ...
-
-

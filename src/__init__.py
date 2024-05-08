@@ -1,1 +1,1 @@
-# to make src a package.
+# src is a package.
