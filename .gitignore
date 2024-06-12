@@ -5,6 +5,7 @@ cred.yml
 config/
 .idea/
 .vscode/
+logs/
 
 # files to exclude
 To-Do.txt
