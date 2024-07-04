@@ -6,6 +6,8 @@ import io
 import logging
 from NorenRestApiPy.NorenApi import NorenApi
 import concurrent.futures
+import pandas as pd
+import json
 
 
 
@@ -95,3 +97,33 @@ class Api(NorenApi):
                             retention=order.retention, remarks=order.remarks)
 
         return ret
+    
+    def get_daily_price_dataframe(self, exchange, tradingsymbol, startdate=None, enddate=None):
+        ret = super().get_daily_price_series(exchange, tradingsymbol, startdate, enddate)
+        if not ret:
+            return ret
+        else:
+            data = pd.DataFrame([json.loads(d) for d in ret])
+            data.drop(['ssboe'],axis=1, inplace=True)
+            data.columns = ['time', 'open', 'high', 'low', 'close', 'volume']
+            ohlcv = ['open', 'high', 'low', 'close', 'volume']
+            data[ohlcv] = data[ohlcv].astype(float)
+            data['time'] = pd.to_datetime(data['time'], format='%d-%m-%Y %H:%M:%S')
+            data = data.sort_values('time', ascending=True)
+            data.set_index('time', inplace=True)
+            return data
+        
+    def get_time_price_dataframe(self, exchange, token, starttime=None, endtime=None, interval=None):
+        ret =  super().get_time_price_series(exchange, token, starttime, endtime, interval)
+        if not ret:
+            return ret 
+        else:
+            data = pd.DataFrame(ret)
+            data.drop(['stat', 'ssboe','intoi', 'v', 'oi'], axis=1, inplace=True)
+            data.columns = ['time', 'open', 'high', 'low', 'close', 'vwap', 'volume']
+            col = ['open', 'high', 'low', 'close', 'vwap', 'volume']
+            data[col] = data[col].astype(float)
+            data['time'] = pd.to_datetime(data['time'], format='%d-%m-%Y %H:%M:%S')
+            data = data.sort_values('time', ascending=True)
+            data.set_index('time', inplace=True)
+            return data

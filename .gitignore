@@ -6,6 +6,7 @@ config/
 .idea/
 .vscode/
 logs/
+bot/
 
 # files to exclude
 To-Do.txt
